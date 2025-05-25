@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Menu from './Menu';
+import Cart from './Cart';
+import Order from './Order';
+
+declare global {
+  interface Window {
+    Telegram?: any;
+  }
+}
 
 function App() {
+  const [page, setPage] = useState<'menu' | 'cart' | 'order'>('menu');
+
+  // Telegram WebApp integration
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.ready();
+      window.Telegram.WebApp.expand();
+    }
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Telegram Cafe</h1>
+        <nav>
+          <button onClick={() => setPage('menu')}>Меню</button>
+          <button onClick={() => setPage('cart')}>Корзина</button>
+          <button onClick={() => setPage('order')}>Оформить заказ</button>
+        </nav>
       </header>
+      <main style={{ padding: 20 }}>
+        {page === 'menu' && <Menu />}
+        {page === 'cart' && <Cart />}
+        {page === 'order' && <Order />}
+      </main>
     </div>
   );
 }
