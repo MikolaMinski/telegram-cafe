@@ -9,6 +9,11 @@ const Order = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Новый стейт для типа заказа и даты/времени
+  const [orderType, setOrderType] = useState<'asap' | 'datetime'>('asap');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+
   // Отправка заказа на API
   const handleOrder = async () => {
     setLoading(true);
@@ -25,6 +30,8 @@ const Order = () => {
             price: item.price,
           })),
           total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+          orderType,
+          ...(orderType === 'datetime' ? { date, time } : {}),
         }),
       });
       if (!response.ok) throw new Error('Ошибка при отправке заказа');
@@ -50,6 +57,43 @@ const Order = () => {
   return (
     <div>
       <h2>Оформление заказа</h2>
+      <div style={{ marginBottom: 16 }}>
+        <label>
+          <input
+            type="radio"
+            name="orderType"
+            value="asap"
+            checked={orderType === 'asap'}
+            onChange={() => setOrderType('asap')}
+          />
+          Как можно быстрее
+        </label>
+        <label style={{ marginLeft: 16 }}>
+          <input
+            type="radio"
+            name="orderType"
+            value="datetime"
+            checked={orderType === 'datetime'}
+            onChange={() => setOrderType('datetime')}
+          />
+          На дату и время
+        </label>
+      </div>
+      {orderType === 'datetime' && (
+        <div style={{ marginBottom: 16 }}>
+          <input
+            type="date"
+            value={date}
+            onChange={e => setDate(e.target.value)}
+            style={{ marginRight: 8 }}
+          />
+          <input
+            type="time"
+            value={time}
+            onChange={e => setTime(e.target.value)}
+          />
+        </div>
+      )}
       <ul style={{ paddingLeft: 0, listStyle: 'none' }}>
         {cart.map((item) => (
           <li
@@ -72,7 +116,10 @@ const Order = () => {
       <div>
         Итог: {cart.reduce((sum, item) => sum + item.price * item.quantity, 0)} BYN
       </div>
-      <button onClick={handleOrder} disabled={loading}>
+      <button
+        onClick={handleOrder}
+        disabled={loading || (orderType === 'datetime' && (!date || !time))}
+      >
         {loading ? 'Отправка...' : 'Заказать'}
       </button>
       {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
