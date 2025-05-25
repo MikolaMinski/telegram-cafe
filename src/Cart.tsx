@@ -3,7 +3,6 @@ import { useCart } from './CartContext';
 
 const Cart = () => {
   const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
-
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   if (cart.length === 0) return <div>Корзина пуста</div>;
@@ -23,6 +22,14 @@ const Cart = () => {
               gap: 8,
             }}
           >
+            {/* Картинка блюда */}
+            {item.image && (
+              <img
+                src={item.image}
+                alt={item.name}
+                style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 6, marginRight: 8 }}
+              />
+            )}
             <span style={{ flex: 1 }}>
               {item.name} — {item.price * item.quantity} BYN
             </span>

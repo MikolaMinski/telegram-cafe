@@ -120,6 +120,14 @@ const Order = () => {
               gap: 8,
             }}
           >
+            {/* Картинка блюда */}
+            {item.image && (
+              <img
+                src={item.image}
+                alt={item.name}
+                style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 6, marginRight: 8 }}
+              />
+            )}
             <span style={{ flex: 1 }}>
               {item.name} × {item.quantity}
             </span>

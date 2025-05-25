@@ -4,6 +4,7 @@ export type Product = {
   id: number;
   name: string;
   price: number;
+  image: string; // добавлено поле image
 };
 
 export type CartItem = Product & { quantity: number };
