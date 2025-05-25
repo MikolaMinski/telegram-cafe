@@ -35,7 +35,7 @@ const Cart = () => {
           </li>
         ))}
       </ul>
-      <div>Итого: {total}₽</div>
+      <div>Итого: {total} BYN</div>
       <button onClick={clearCart}>Очистить корзину</button>
     </div>
   );

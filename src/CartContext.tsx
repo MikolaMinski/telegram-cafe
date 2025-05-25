@@ -52,13 +52,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeFromCart = (productId: number) => {
-    setCart((prev) =>
-      prev
-        .map((item) =>
-          item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
+    setCart((prev) => prev.filter((item) => item.id !== productId));
   };
 
   const clearCart = () => setCart([]);

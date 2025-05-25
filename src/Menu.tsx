@@ -53,7 +53,7 @@ const Menu: React.FC = () => {
         >
           <img src={dish.image} alt={dish.name} style={{ width: 96, height: 96 }} />
           <h3>{dish.name}</h3>
-          <p>{dish.price} ₽</p>
+          <p>{dish.price} BYN</p>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
             <button
               onClick={() => decreaseQuantity(dish.id)}

@@ -59,9 +59,13 @@ const Order = () => {
             <span style={{ flex: 1 }}>
               {item.name} × {item.quantity}
             </span>
+            <span>{item.price * item.quantity} BYN</span>
           </li>
         ))}
       </ul>
+      <div>
+        Итог: {cart.reduce((sum, item) => sum + item.price * item.quantity, 0)} BYN
+      </div>
       <button onClick={handleOrder} disabled={loading}>
         {loading ? 'Отправка...' : 'Заказать'}
       </button>
