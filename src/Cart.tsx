@@ -24,7 +24,7 @@ const Cart = () => {
             }}
           >
             <span style={{ flex: 1 }}>
-              {item.name} — {item.price * item.quantity}₽
+              {item.name} — {item.price * item.quantity} BYN
             </span>
             <button onClick={() => decreaseQuantity(item.id)}>-</button>
             <span style={{ minWidth: 24, textAlign: 'center' }}>{item.quantity}</span>
