@@ -20,6 +20,108 @@ const dishes: (Product & { image: string })[] = [
     price: 700,
     image: 'https://img.icons8.com/color/96/000000/sushi.png',
   },
+  {
+    id: 4,
+    name: 'Цезарь с курицей',
+    price: 320,
+    image: 'https://img.icons8.com/color/96/000000/salad.png',
+  },
+  {
+    id: 5,
+    name: 'Бургер классический',
+    price: 390,
+    image: 'https://img.icons8.com/color/96/000000/hamburger.png',
+  },
+  {
+    id: 6,
+    name: 'Картофель фри',
+    price: 150,
+    image: 'https://img.icons8.com/color/96/000000/french-fries.png',
+  },
+  {
+    id: 7,
+    name: 'Паста Карбонара',
+    price: 410,
+    image: 'https://img.icons8.com/color/96/000000/spaghetti.png',
+  },
+  {
+    id: 8,
+    name: 'Шашлык из свинины',
+    price: 600,
+    image: 'https://img.icons8.com/color/96/000000/barbecue.png',
+  },
+  {
+    id: 9,
+    name: 'Оливье',
+    price: 270,
+    image: 'https://img.icons8.com/color/96/000000/olivier-salad.png',
+  },
+  {
+    id: 10,
+    name: 'Пельмени',
+    price: 330,
+    image: 'https://img.icons8.com/color/96/000000/dumplings.png',
+  },
+  {
+    id: 11,
+    name: 'Куриный суп',
+    price: 220,
+    image: 'https://img.icons8.com/color/96/000000/chicken-soup.png',
+  },
+  {
+    id: 12,
+    name: 'Греческий салат',
+    price: 290,
+    image: 'https://img.icons8.com/color/96/000000/greek-salad.png',
+  },
+  {
+    id: 13,
+    name: 'Ролл Филадельфия',
+    price: 480,
+    image: 'https://img.icons8.com/color/96/000000/salmon-sushi.png',
+  },
+  {
+    id: 14,
+    name: 'Котлета по-киевски',
+    price: 370,
+    image: 'https://img.icons8.com/color/96/000000/chicken-leg.png',
+  },
+  {
+    id: 15,
+    name: 'Сырники',
+    price: 210,
+    image: 'https://img.icons8.com/color/96/000000/cheesecake.png',
+  },
+  {
+    id: 16,
+    name: 'Блины с творогом',
+    price: 200,
+    image: 'https://img.icons8.com/color/96/000000/pancake.png',
+  },
+  {
+    id: 17,
+    name: 'Стейк говяжий',
+    price: 850,
+    image: 'https://img.icons8.com/color/96/000000/steak.png',
+  },
+  {
+    id: 18,
+    name: 'Салат с тунцом',
+    price: 340,
+    image: 'https://img.icons8.com/color/96/000000/tuna-salad.png',
+  },
+  {
+    id: 19,
+    name: 'Морс клюквенный',
+    price: 90,
+    image: 'https://img.icons8.com/color/96/000000/juice.png',
+  },
+  {
+    id: 20,
+    name: 'Чизкейк Нью-Йорк',
+    price: 260,
+    image: 'https://img.icons8.com/color/96/000000/cake.png',
+  },
 ];
 
 const Menu: React.FC = () => {
