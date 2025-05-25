@@ -10,9 +10,23 @@ const Order = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Новый стейт для типа заказа и даты/времени
-  const [orderType, setOrderType] = useState<'asap' | 'datetime'>('asap');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const [orderType, setOrderType] = useState<'asap' | 'datetime'>(() => {
+    return (localStorage.getItem('orderType') as 'asap' | 'datetime') || 'asap';
+  });
+  const [date, setDate] = useState(() => localStorage.getItem('orderDate') || '');
+  const [time, setTime] = useState(() => localStorage.getItem('orderTime') || '');
+
+  // Сохраняем значения в localStorage при изменении
+  useEffect(() => {
+    localStorage.setItem('orderType', orderType);
+    if (orderType === 'datetime') {
+      localStorage.setItem('orderDate', date);
+      localStorage.setItem('orderTime', time);
+    } else {
+      localStorage.removeItem('orderDate');
+      localStorage.removeItem('orderTime');
+    }
+  }, [orderType, date, time]);
 
   // Отправка заказа на API
   const handleOrder = async () => {
