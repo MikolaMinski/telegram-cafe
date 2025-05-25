@@ -31,7 +31,13 @@ const Order = () => {
       setSubmitted(true);
       clearCart();
     } catch (e: any) {
-      setError(e.message || 'Ошибка');
+      setError(
+        e instanceof TypeError && e.message === 'Failed to fetch'
+          ? 'Не удалось подключиться к серверу. Проверьте интернет или попробуйте позже.'
+          : 'Произошла ошибка при оформлении заказа. Попробуйте ещё раз.'
+      );
+      // Для отладки можно раскомментировать следующую строку:
+      // console.error(e);
     } finally {
       setLoading(false);
     }
