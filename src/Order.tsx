@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from './CartContext';
 
-const API_URL = 'https://your-api-endpoint.example.com/order'; // замените на ваш API
+const API_URL = 'https://telegram-cafewebapi.onrender.com/api/Message/Send'; // замените на ваш API
 
 const Order = () => {
   const { cart, clearCart } = useCart();
