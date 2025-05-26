@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Telegram Cafe</h1>
+        <h1>Кафе "Возера"</h1>
         <nav>
           <button onClick={() => setPage('menu')}>Меню</button>
           <button onClick={() => setPage('cart')}>Корзина</button>
