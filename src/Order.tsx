@@ -46,6 +46,7 @@ const Order = () => {
       console.log('tg.initDataUnsafe.user:', user);
 
     }
+    console.log('tg.initDataUnsafe.user:',"test");
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
