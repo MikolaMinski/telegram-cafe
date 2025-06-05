@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/telegram-cafe/static/css/main.672e5ae3.css",
-    "main.js": "/telegram-cafe/static/js/main.fbc056da.js",
+    "main.js": "/telegram-cafe/static/js/main.df0679f7.js",
     "static/js/453.be0c7c36.chunk.js": "/telegram-cafe/static/js/453.be0c7c36.chunk.js",
     "index.html": "/telegram-cafe/index.html",
     "main.672e5ae3.css.map": "/telegram-cafe/static/css/main.672e5ae3.css.map",
-    "main.fbc056da.js.map": "/telegram-cafe/static/js/main.fbc056da.js.map",
+    "main.df0679f7.js.map": "/telegram-cafe/static/js/main.df0679f7.js.map",
     "453.be0c7c36.chunk.js.map": "/telegram-cafe/static/js/453.be0c7c36.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.672e5ae3.css",
-    "static/js/main.fbc056da.js"
+    "static/js/main.df0679f7.js"
   ]
 }
