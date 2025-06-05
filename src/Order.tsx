@@ -34,8 +34,10 @@ const Order = () => {
     setError(null);
     // Получаем telegramUserId из Telegram WebApp, если доступно
     let telegramUserId: number | undefined;
-    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
-      telegramUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
+    if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+      telegramUserId = tg.initDataUnsafe?.user?.id;
     }
     try {
       const response = await fetch(API_URL, {
