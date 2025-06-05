@@ -43,7 +43,8 @@ const Order = () => {
       if (user) {
         telegramUserId = user.id;
       }
-      
+      console.log('tg.initDataUnsafe.user:', user);
+
     }
     try {
       const response = await fetch(API_URL, {
