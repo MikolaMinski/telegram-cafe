@@ -54,13 +54,18 @@ const Order = () => {
           telegramUserId, // добавляем id пользователя Telegram
         }),
       });
-      if (!response.ok) throw new Error('Ошибка при отправке заказа');
+      if (!response.ok) {
+        // Получаем текст ошибки с сервера и выводим в консоль
+        const errorText = await response.text();
+        console.error('Ошибка сервера:', errorText);
+        throw new Error('Ошибка при отправке заказа');
+      }
       setSubmitted(true);
       clearCart();
     } catch (e: any) {
       setError(
         e instanceof TypeError && e.message === 'Failed to fetch'
-          ? e.message/*'Не удалось подключиться к серверу. Проверьте интернет или попробуйте позже.'*/
+          ? 'Не удалось подключиться к серверу. Проверьте интернет или попробуйте позже.'
           : 'Произошла ошибка при оформлении заказа. Попробуйте ещё раз.'
       );
       // Для отладки можно раскомментировать следующую строку:
