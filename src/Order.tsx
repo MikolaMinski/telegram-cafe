@@ -34,19 +34,15 @@ const Order = () => {
     setError(null);
     // Получаем telegramUserId из Telegram WebApp, если доступно
     let telegramUserId: number | undefined;
-    if (window.Telegram && window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.ready();
-      // Получаем пользователя
-      const user = tg.initDataUnsafe?.user;
-
-      if (user) {
-        telegramUserId = user.id;
-      }
-      console.log('tg.initDataUnsafe.user:', user);
-
+    if (
+      window.Telegram &&
+      window.Telegram.WebApp &&
+      window.Telegram.WebApp.initDataUnsafe &&
+      window.Telegram.WebApp.initDataUnsafe.user
+    ) {
+      telegramUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
     }
-    console.log('tg.initDataUnsafe.user:',"test");
+    console.log("UserId",telegramUserId);
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -61,7 +57,7 @@ const Order = () => {
           total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
           orderType,
           ...(orderType === 'datetime' ? { date, time } : {}),
-          telegramUserId, // добавляем id пользователя Telegram
+          telegramUserId,
         }),
       });
       if (!response.ok) {
