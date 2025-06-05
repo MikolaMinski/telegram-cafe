@@ -37,7 +37,13 @@ const Order = () => {
     if (window.Telegram && window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
-      telegramUserId = tg.initDataUnsafe?.user?.id;
+      // Получаем пользователя
+      const user = tg.initDataUnsafe?.user;
+
+      if (user) {
+        telegramUserId = user.id;
+      }
+      
     }
     try {
       const response = await fetch(API_URL, {
