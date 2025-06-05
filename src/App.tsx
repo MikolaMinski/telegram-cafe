@@ -40,6 +40,7 @@ function App() {
         {page === 'cart' && <Cart />}
         {page === 'order' && <Order />}
       </main>
+        <h1>Test: {user}</h1>
     </div>
   );
 }
