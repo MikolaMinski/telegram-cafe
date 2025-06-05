@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Menu from './Menu';
 import Cart from './Cart';
@@ -13,15 +13,15 @@ declare global {
 function App() {
   const [page, setPage] = useState<'menu' | 'cart' | 'order'>('menu');
 
-  var user = undefined;
+  const [user, setUser] = useState<any>(null);
 
-  // Telegram WebApp integration
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       window.Telegram.WebApp.ready();
-      user = window.Telegram.WebApp.initDataUnsafe.user;
+      const tgUser = window.Telegram.WebApp.initDataUnsafe?.user || null;
+      setUser(tgUser);
       window.Telegram.WebApp.expand();
-      console.log("User:",user);
+      console.log("User:", tgUser);
     }
   }, []);
 
@@ -40,7 +40,12 @@ function App() {
         {page === 'cart' && <Cart />}
         {page === 'order' && <Order />}
       </main>
-        <h1>Test: {user}</h1>
+      <h2>Test User:</h2>
+      {user ? (
+        <pre>{JSON.stringify(user, null, 2)}</pre>
+      ) : (
+        <p>Пользователь Telegram не найден</p>
+      )}
     </div>
   );
 }
