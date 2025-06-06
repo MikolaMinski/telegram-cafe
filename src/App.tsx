@@ -15,15 +15,15 @@ function App() {
 
   const [user, setUser] = useState<any>(null);
 
-  // useEffect(() => {
-  //   if (window.Telegram && window.Telegram.WebApp) {
-  //     window.Telegram.WebApp.ready();
-  //     const tgUser = window.Telegram.WebApp.initDataUnsafe?.user || null;
-  //     setUser(tgUser);
-  //     window.Telegram.WebApp.expand();
-  //     console.log("User:", tgUser);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (window.Telegram && window.Telegram.WebApp) {
+      window.Telegram.WebApp.ready();
+      const tgUser = window.Telegram.WebApp.initDataUnsafe?.user || null;
+      setUser(tgUser);
+      window.Telegram.WebApp.expand();
+    }
+  }, []);
+  console.log("Telegram:", window.Telegram);
 
   return (
     <div className="App">
