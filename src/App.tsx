@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       window.Telegram.WebApp.ready();
-      const tgUser = window.Telegram.WebApp.initDataUnsafe?.user || null;
+      const tgUser = window.Telegram || null;
       setUser(tgUser);
       window.Telegram.WebApp.expand();
     }
