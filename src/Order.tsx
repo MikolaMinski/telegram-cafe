@@ -42,7 +42,6 @@ const Order = () => {
     ) {
       telegramUserId = window.Telegram.WebApp.initDataUnsafe.user.id;
     }
-    console.log("UserId",telegramUserId);
     try {
       const response = await fetch(API_URL, {
         method: 'POST',
