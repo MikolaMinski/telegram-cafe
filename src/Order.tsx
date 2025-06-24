@@ -63,7 +63,7 @@ const Order = () => {
         // Получаем текст ошибки с сервера и выводим в консоль
         const errorText = await response.text();
         console.error('Ошибка сервера:', errorText);
-        throw new Error('Ошибка при отправке заказа');
+        throw new Error('Ошибка при отправке заказа: ' + errorText);
       }
       setSubmitted(true);
       clearCart();
@@ -71,7 +71,7 @@ const Order = () => {
       setError(
         e instanceof TypeError && e.message === 'Failed to fetch'
           ? 'Не удалось подключиться к серверу. Проверьте интернет или попробуйте позже.'
-          : 'Произошла ошибка при оформлении заказа. Попробуйте ещё раз.'
+          : e.message
       );
       // Для отладки можно раскомментировать следующую строку:
       // console.error(e);
