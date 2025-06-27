@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from './CartContext';
 
-const API_URL = 'https://cafevozeraapi.somee.com/api/Message/MakeOrder'; // замените на ваш API
+const API_URL = 'https://cafevozeraapi.somee.com/api/Message/MakeOrder';
 
 const Order = () => {
   const { cart, clearCart } = useCart();
@@ -9,14 +9,12 @@ const Order = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Новый стейт для типа заказа и даты/времени
   const [orderType, setOrderType] = useState<'asap' | 'datetime'>(() => {
     return (localStorage.getItem('orderType') as 'asap' | 'datetime') || 'asap';
   });
   const [date, setDate] = useState(() => localStorage.getItem('orderDate') || '');
   const [time, setTime] = useState(() => localStorage.getItem('orderTime') || '');
 
-  // Сохраняем значения в localStorage при изменении
   useEffect(() => {
     localStorage.setItem('orderType', orderType);
     if (orderType === 'datetime') {
@@ -28,11 +26,9 @@ const Order = () => {
     }
   }, [orderType, date, time]);
 
-  // Отправка заказа на API
   const handleOrder = async () => {
     setLoading(true);
     setError(null);
-    // Получаем telegramUserId из Telegram WebApp, если доступно
     let telegramUserId: number | undefined;
     if (
       window.Telegram &&
@@ -60,7 +56,6 @@ const Order = () => {
         }),
       });
       if (!response.ok) {
-        // Получаем текст ошибки с сервера и выводим в консоль
         const errorText = await response.text();
         console.error('Ошибка сервера:', errorText);
         throw new Error('Ошибка при отправке заказа: ' + errorText);
@@ -73,94 +68,186 @@ const Order = () => {
           ? 'Не удалось подключиться к серверу. Проверьте интернет или попробуйте позже.'
           : e.message
       );
-      // Для отладки можно раскомментировать следующую строку:
-      // console.error(e);
     } finally {
       setLoading(false);
     }
   };
 
-  if (submitted) return <div>Спасибо за заказ! Мы свяжемся с вами.</div>;
+  if (submitted)
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          color: '#2563eb',
+          fontWeight: 700,
+          fontSize: 24,
+          marginTop: 48,
+        }}
+      >
+        Спасибо за заказ! Мы свяжемся с вами.
+      </div>
+    );
 
-  if (cart.length === 0) return <div>Корзина пуста</div>;
+  if (cart.length === 0)
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          color: '#888',
+          fontSize: 20,
+          marginTop: 32,
+        }}
+      >
+        Корзина пуста
+      </div>
+    );
 
   return (
-    <div>
-      <h2>Оформление заказа</h2>
-      <div style={{ marginBottom: 16 }}>
-        <label>
+    <div
+      style={{
+        maxWidth: 520,
+        margin: '0 auto',
+        background: '#fff',
+        borderRadius: 16,
+        boxShadow: '0 2px 12px 0 rgba(0,0,0,0.07)',
+        padding: 32,
+      }}
+    >
+      <h2 style={{ fontWeight: 700, fontSize: 26, marginBottom: 24, color: '#222' }}>
+        Оформление заказа
+      </h2>
+      <div style={{ marginBottom: 24, display: 'flex', gap: 24 }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500 }}>
           <input
             type="radio"
             name="orderType"
             value="asap"
             checked={orderType === 'asap'}
             onChange={() => setOrderType('asap')}
+            style={{ accentColor: '#2563eb', width: 18, height: 18 }}
           />
           Как можно быстрее
         </label>
-        <label style={{ marginLeft: 16 }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500 }}>
           <input
             type="radio"
             name="orderType"
             value="datetime"
             checked={orderType === 'datetime'}
             onChange={() => setOrderType('datetime')}
+            style={{ accentColor: '#2563eb', width: 18, height: 18 }}
           />
           На дату и время
         </label>
       </div>
       {orderType === 'datetime' && (
-        <div style={{ marginBottom: 16 }}>
+        <div style={{ marginBottom: 24, display: 'flex', gap: 16 }}>
           <input
             type="date"
             value={date}
             onChange={e => setDate(e.target.value)}
-            style={{ marginRight: 8 }}
+            style={{
+              marginRight: 8,
+              border: '1px solid #d1d5db',
+              borderRadius: 8,
+              padding: '8px 12px',
+              fontSize: 16,
+              fontWeight: 500,
+              color: '#222',
+              background: '#f9fafb',
+            }}
           />
           <input
             type="time"
             value={time}
             onChange={e => setTime(e.target.value)}
+            style={{
+              border: '1px solid #d1d5db',
+              borderRadius: 8,
+              padding: '8px 12px',
+              fontSize: 16,
+              fontWeight: 500,
+              color: '#222',
+              background: '#f9fafb',
+            }}
           />
         </div>
       )}
-      <ul style={{ paddingLeft: 0, listStyle: 'none' }}>
+      <ul style={{ paddingLeft: 0, listStyle: 'none', marginBottom: 24 }}>
         {cart.map((item) => (
           <li
             key={item.id}
             style={{
-              marginBottom: 10,
+              marginBottom: 14,
               display: 'flex',
-              flexWrap: 'wrap',
               alignItems: 'center',
-              gap: 8,
+              gap: 12,
+              background: '#f3f4f6',
+              borderRadius: 8,
+              padding: 10,
             }}
           >
-            {/* Картинка блюда */}
             {item.image && (
               <img
                 src={item.image}
                 alt={item.name}
-                style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 6, marginRight: 8 }}
+                style={{
+                  width: 40,
+                  height: 40,
+                  objectFit: 'cover',
+                  borderRadius: 6,
+                  marginRight: 8,
+                  background: '#fff',
+                }}
               />
             )}
-            <span style={{ flex: 1 }}>
+            <span style={{ flex: 1, fontWeight: 500, fontSize: 17, color: '#222' }}>
               {item.name} × {item.quantity}
             </span>
-            <span>{item.price * item.quantity} BYN</span>
+            <span style={{ fontWeight: 600, fontSize: 17, color: '#2563eb' }}>
+              {item.price * item.quantity} BYN
+            </span>
           </li>
         ))}
       </ul>
-      <div>
-        Итог: {cart.reduce((sum, item) => sum + item.price * item.quantity, 0)} BYN
+      <div
+        style={{
+          fontWeight: 700,
+          fontSize: 20,
+          color: '#222',
+          marginBottom: 28,
+          textAlign: 'right',
+        }}
+      >
+        Итог:{' '}
+        <span style={{ color: '#2563eb' }}>
+          {cart.reduce((sum, item) => sum + item.price * item.quantity, 0)} BYN
+        </span>
       </div>
       <button
         onClick={handleOrder}
         disabled={loading || (orderType === 'datetime' && (!date || !time))}
+        style={{
+          width: '100%',
+          background: loading ? '#93c5fd' : '#2563eb',
+          color: '#fff',
+          border: 'none',
+          borderRadius: 10,
+          padding: '16px 0',
+          fontWeight: 700,
+          fontSize: 20,
+          cursor: loading ? 'not-allowed' : 'pointer',
+          boxShadow: '0 1px 6px 0 rgba(0,0,0,0.04)',
+          transition: 'background 0.15s',
+        }}
       >
         {loading ? 'Отправка...' : 'Заказать'}
       </button>
-      {error && <div style={{ color: 'red', marginTop: 8 }}>{error}</div>}
+      {error && (
+        <div style={{ color: '#f87171', marginTop: 18, textAlign: 'center', fontWeight: 500 }}>
+          {error}
+        </div>
+      )}
     </div>
   );
 };
