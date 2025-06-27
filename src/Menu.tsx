@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCart, Product } from './CartContext';
 
-const MENU_API_URL = 'https://localhost:443/api/Menu';
+const MENU_API_URL = 'https://cafevozeraapi.somee.com/api/Menu';
 
 // Буферизация меню на уровне модуля (одна загрузка за сессию)
 let menuCache: Product[] | null = null;
