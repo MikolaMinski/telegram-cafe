@@ -78,13 +78,15 @@ const Order = () => {
       <div
         style={{
           textAlign: 'center',
-          color: '#2563eb',
+          color: '#059669',
           fontWeight: 700,
-          fontSize: 24,
-          marginTop: 48,
+          fontSize: 26,
+          marginTop: 60,
+          letterSpacing: 0.5,
         }}
       >
-        Спасибо за заказ! Мы свяжемся с вами.
+        <span style={{ fontSize: 48, display: 'block', marginBottom: 16 }}>🎉</span>
+        Спасибо за заказ!<br />Мы свяжемся с вами.
       </div>
     );
 
@@ -94,8 +96,9 @@ const Order = () => {
         style={{
           textAlign: 'center',
           color: '#888',
-          fontSize: 20,
-          marginTop: 32,
+          fontSize: 22,
+          marginTop: 40,
+          letterSpacing: 0.2,
         }}
       >
         Корзина пуста
@@ -105,56 +108,57 @@ const Order = () => {
   return (
     <div
       style={{
-        maxWidth: 520,
+        maxWidth: 540,
         margin: '0 auto',
-        background: '#fff',
-        borderRadius: 16,
-        boxShadow: '0 2px 12px 0 rgba(0,0,0,0.07)',
-        padding: 32,
+        background: '#f9fafb',
+        borderRadius: 18,
+        boxShadow: '0 2px 16px 0 rgba(0,0,0,0.06)',
+        padding: 36,
+        border: '1.5px solid #e5e7eb',
       }}
     >
-      <h2 style={{ fontWeight: 700, fontSize: 26, marginBottom: 24, color: '#222' }}>
+      <h2 style={{ fontWeight: 800, fontSize: 28, marginBottom: 28, color: '#222', letterSpacing: 0.5 }}>
         Оформление заказа
       </h2>
-      <div style={{ marginBottom: 24, display: 'flex', gap: 24 }}>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500 }}>
+      <div style={{ marginBottom: 28, display: 'flex', gap: 32 }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 10, fontWeight: 600, color: '#2563eb' }}>
           <input
             type="radio"
             name="orderType"
             value="asap"
             checked={orderType === 'asap'}
             onChange={() => setOrderType('asap')}
-            style={{ accentColor: '#2563eb', width: 18, height: 18 }}
+            style={{ accentColor: '#2563eb', width: 20, height: 20 }}
           />
           Как можно быстрее
         </label>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500 }}>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 10, fontWeight: 600, color: '#2563eb' }}>
           <input
             type="radio"
             name="orderType"
             value="datetime"
             checked={orderType === 'datetime'}
             onChange={() => setOrderType('datetime')}
-            style={{ accentColor: '#2563eb', width: 18, height: 18 }}
+            style={{ accentColor: '#2563eb', width: 20, height: 20 }}
           />
           На дату и время
         </label>
       </div>
       {orderType === 'datetime' && (
-        <div style={{ marginBottom: 24, display: 'flex', gap: 16 }}>
+        <div style={{ marginBottom: 28, display: 'flex', gap: 18 }}>
           <input
             type="date"
             value={date}
             onChange={e => setDate(e.target.value)}
             style={{
-              marginRight: 8,
-              border: '1px solid #d1d5db',
-              borderRadius: 8,
-              padding: '8px 12px',
-              fontSize: 16,
+              border: '1.5px solid #d1d5db',
+              borderRadius: 10,
+              padding: '10px 14px',
+              fontSize: 17,
               fontWeight: 500,
               color: '#222',
-              background: '#f9fafb',
+              background: '#fff',
+              minWidth: 120,
             }}
           />
           <input
@@ -162,29 +166,31 @@ const Order = () => {
             value={time}
             onChange={e => setTime(e.target.value)}
             style={{
-              border: '1px solid #d1d5db',
-              borderRadius: 8,
-              padding: '8px 12px',
-              fontSize: 16,
+              border: '1.5px solid #d1d5db',
+              borderRadius: 10,
+              padding: '10px 14px',
+              fontSize: 17,
               fontWeight: 500,
               color: '#222',
-              background: '#f9fafb',
+              background: '#fff',
+              minWidth: 100,
             }}
           />
         </div>
       )}
-      <ul style={{ paddingLeft: 0, listStyle: 'none', marginBottom: 24 }}>
+      <ul style={{ paddingLeft: 0, listStyle: 'none', marginBottom: 28 }}>
         {cart.map((item) => (
           <li
             key={item.id}
             style={{
-              marginBottom: 14,
+              marginBottom: 16,
               display: 'flex',
               alignItems: 'center',
-              gap: 12,
+              gap: 14,
               background: '#f3f4f6',
-              borderRadius: 8,
-              padding: 10,
+              borderRadius: 10,
+              padding: 12,
+              boxShadow: '0 1px 4px 0 rgba(0,0,0,0.03)',
             }}
           >
             {item.image && (
@@ -192,19 +198,20 @@ const Order = () => {
                 src={item.image}
                 alt={item.name}
                 style={{
-                  width: 40,
-                  height: 40,
+                  width: 44,
+                  height: 44,
                   objectFit: 'cover',
-                  borderRadius: 6,
+                  borderRadius: 8,
                   marginRight: 8,
                   background: '#fff',
+                  boxShadow: '0 1px 4px 0 rgba(0,0,0,0.03)',
                 }}
               />
             )}
-            <span style={{ flex: 1, fontWeight: 500, fontSize: 17, color: '#222' }}>
-              {item.name} × {item.quantity}
+            <span style={{ flex: 1, fontWeight: 600, fontSize: 18, color: '#222' }}>
+              {item.name} <span style={{ color: '#888', fontWeight: 400 }}>× {item.quantity}</span>
             </span>
-            <span style={{ fontWeight: 600, fontSize: 17, color: '#2563eb' }}>
+            <span style={{ fontWeight: 700, fontSize: 18, color: '#2563eb' }}>
               {item.price * item.quantity} BYN
             </span>
           </li>
@@ -212,10 +219,10 @@ const Order = () => {
       </ul>
       <div
         style={{
-          fontWeight: 700,
-          fontSize: 20,
+          fontWeight: 800,
+          fontSize: 22,
           color: '#222',
-          marginBottom: 28,
+          marginBottom: 32,
           textAlign: 'right',
         }}
       >
@@ -232,19 +239,20 @@ const Order = () => {
           background: loading ? '#93c5fd' : '#2563eb',
           color: '#fff',
           border: 'none',
-          borderRadius: 10,
-          padding: '16px 0',
-          fontWeight: 700,
-          fontSize: 20,
+          borderRadius: 12,
+          padding: '18px 0',
+          fontWeight: 800,
+          fontSize: 22,
           cursor: loading ? 'not-allowed' : 'pointer',
-          boxShadow: '0 1px 6px 0 rgba(0,0,0,0.04)',
+          boxShadow: '0 1px 8px 0 rgba(0,0,0,0.04)',
           transition: 'background 0.15s',
+          letterSpacing: 0.5,
         }}
       >
         {loading ? 'Отправка...' : 'Заказать'}
       </button>
       {error && (
-        <div style={{ color: '#f87171', marginTop: 18, textAlign: 'center', fontWeight: 500 }}>
+        <div style={{ color: '#f87171', marginTop: 22, textAlign: 'center', fontWeight: 600, fontSize: 17 }}>
           {error}
         </div>
       )}
