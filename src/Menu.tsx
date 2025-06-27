@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useCart, Product } from './CartContext';
 
-const MENU_API_URL = 'https://cafevozeraapi.somee.com/api/Menu'; // замените на ваш API
+const MENU_API_URL = 'https://localhost:443/api/Menu'; // замените на ваш API
 
 const Menu: React.FC = () => {
   const { cart, addToCart, increaseQuantity, decreaseQuantity } = useCart();
