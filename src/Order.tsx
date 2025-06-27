@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from './CartContext';
 
-const API_URL = 'https://cafevozeraapi.somee.com/api/Message/MakeOrder';
+const API_URL = 'https://cafevozeraapi.somee.com/api/Message/MakeOrder';//
 
 const Order = () => {
   const { cart, clearCart } = useCart();
