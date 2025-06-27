@@ -1,29 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { useCart, Product } from './CartContext';
 
-const MENU_API_URL = 'https://localhost:443/api/Menu'; // замените на ваш API
+const MENU_API_URL = 'https://localhost:443/api/Menu';
+
+// Буферизация меню на уровне модуля (одна загрузка за сессию)
+let menuCache: Product[] | null = null;
+let menuCacheError: string | null = null;
 
 const Menu: React.FC = () => {
   const { cart, addToCart, increaseQuantity, decreaseQuantity } = useCart();
 
-  const [dishes, setDishes] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [dishes, setDishes] = useState<Product[]>(menuCache || []);
+  const [loading, setLoading] = useState(menuCache === null && menuCacheError === null);
+  const [error, setError] = useState<string | null>(menuCacheError);
 
   useEffect(() => {
+    if (menuCache !== null || menuCacheError !== null) {
+      // Уже загружено или была ошибка — не грузим снова
+      return;
+    }
     setLoading(true);
     fetch(MENU_API_URL)
       .then((res) => {
         if (!res.ok) throw new Error('Ошибка загрузки меню');
         return res.json();
       })
-      .then(setDishes)
+      .then((data) => {
+        menuCache = data;
+        menuCacheError = null;
+        setDishes(data);
+        setError(null);
+      })
       .catch((e) => {
-        if (e instanceof TypeError && e.message === 'Failed to fetch') {
-          setError('Не удалось загрузить меню. Ошибка сервера.');
-        } else {
-          setError(e.message);
-        }
+        const msg =
+          e instanceof TypeError && e.message === 'Failed to fetch'
+            ? 'Не удалось загрузить меню. Ошибка сервера.'
+            : e.message;
+        menuCache = [];
+        menuCacheError = msg;
+        setError(msg);
       })
       .finally(() => setLoading(false));
   }, []);
