@@ -110,8 +110,8 @@ const Menu: React.FC = () => {
               src={dish.image}
               alt={dish.name}
               style={{
-                width: 110,
-                height: 110,
+                width: 210,
+                height: 250,
                 objectFit: 'cover',
                 borderRadius: 12,
                 marginBottom: 18,
