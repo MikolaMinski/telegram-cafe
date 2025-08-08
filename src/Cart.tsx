@@ -60,7 +60,7 @@ const Cart = () => {
                 {item.price * item.quantity} BYN
               </span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 12 }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, marginTop: 12 }}>
               <button
                 onClick={() => decreaseQuantity(item.id)}
                 style={{
@@ -86,6 +86,9 @@ const Cart = () => {
                   fontWeight: 500,
                   color: '#222',
                   userSelect: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 {item.quantity}
