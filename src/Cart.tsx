@@ -29,8 +29,7 @@ const Cart = () => {
             style={{
               marginBottom: 18,
               display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
+              flexDirection: 'column',
               gap: 12,
               background: '#fff',
               borderRadius: 12,
@@ -47,83 +46,84 @@ const Cart = () => {
                   height: 48,
                   objectFit: 'cover',
                   borderRadius: 8,
-                  marginRight: 12,
                   background: '#f3f4f6',
+                  marginBottom: 12,
                 }}
               />
             )}
-            <span style={{ flex: 1, fontWeight: 500, fontSize: 18, color: '#222' }}>
-              {item.name}
-              <span style={{ color: '#888', fontWeight: 400, marginLeft: 8 }}>× {item.quantity}</span>
-            </span>
-            <span style={{ fontWeight: 600, fontSize: 18, color: '#2563eb', minWidth: 70, textAlign: 'right' }}>
-              {item.price * item.quantity} BYN
-            </span>
-            <button
-              onClick={() => decreaseQuantity(item.id)}
-              style={{
-                border: 'none',
-                background: '#f3f4f6',
-                color: '#222',
-                borderRadius: 8,
-                width: 36,
-                height: 36,
-                fontSize: 22,
-                fontWeight: 600,
-                cursor: 'pointer',
-                marginLeft: 8,
-              }}
-              aria-label="Уменьшить количество"
-            >
-              −
-            </button>
-            <span
-              style={{
-                minWidth: 32,
-                textAlign: 'center',
-                fontSize: 18,
-                fontWeight: 500,
-                color: '#222',
-                userSelect: 'none',
-              }}
-            >
-              {item.quantity}
-            </span>
-            <button
-              onClick={() => increaseQuantity(item.id)}
-              style={{
-                border: 'none',
-                background: '#3b82f6',
-                color: '#fff',
-                borderRadius: 8,
-                width: 36,
-                height: 36,
-                fontSize: 22,
-                fontWeight: 600,
-                cursor: 'pointer',
-                marginLeft: 4,
-              }}
-              aria-label="Увеличить количество"
-            >
-              +
-            </button>
-            <button
-              onClick={() => removeFromCart(item.id)}
-              style={{
-                marginLeft: 12,
-                border: 'none',
-                background: '#f87171',
-                color: '#fff',
-                borderRadius: 8,
-                padding: '8px 14px',
-                fontWeight: 600,
-                fontSize: 16,
-                cursor: 'pointer',
-                transition: 'background 0.15s',
-              }}
-            >
-              Удалить
-            </button>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ flex: 1, fontWeight: 500, fontSize: 18, color: '#222', wordBreak: 'break-word' }}>
+                {item.name}
+                <span style={{ color: '#888', fontWeight: 400, marginLeft: 8 }}>× {item.quantity}</span>
+              </span>
+              <span style={{ fontWeight: 600, fontSize: 18, color: '#2563eb', minWidth: 70, textAlign: 'right' }}>
+                {item.price * item.quantity} BYN
+              </span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 12 }}>
+              <button
+                onClick={() => decreaseQuantity(item.id)}
+                style={{
+                  border: 'none',
+                  background: '#f3f4f6',
+                  color: '#222',
+                  borderRadius: 8,
+                  width: 36,
+                  height: 36,
+                  fontSize: 22,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+                aria-label="Уменьшить количество"
+              >
+                −
+              </button>
+              <span
+                style={{
+                  minWidth: 32,
+                  textAlign: 'center',
+                  fontSize: 18,
+                  fontWeight: 500,
+                  color: '#222',
+                  userSelect: 'none',
+                }}
+              >
+                {item.quantity}
+              </span>
+              <button
+                onClick={() => increaseQuantity(item.id)}
+                style={{
+                  border: 'none',
+                  background: '#3b82f6',
+                  color: '#fff',
+                  borderRadius: 8,
+                  width: 36,
+                  height: 36,
+                  fontSize: 22,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+                aria-label="Увеличить количество"
+              >
+                +
+              </button>
+              <button
+                onClick={() => removeFromCart(item.id)}
+                style={{
+                  border: 'none',
+                  background: '#f87171',
+                  color: '#fff',
+                  borderRadius: 8,
+                  padding: '8px 14px',
+                  fontWeight: 600,
+                  fontSize: 16,
+                  cursor: 'pointer',
+                  transition: 'background 0.15s',
+                }}
+              >
+                Удалить
+              </button>
+            </div>
           </li>
         ))}
       </ul>
