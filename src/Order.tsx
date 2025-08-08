@@ -49,7 +49,7 @@ const Order = () => {
             quantity: item.quantity,
             price: item.price,
           })),
-          total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+          total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2),
           orderType,
           ...(orderType === 'datetime' ? { date, time } : {}),
           telegramUserId,
@@ -205,7 +205,7 @@ const Order = () => {
               {item.name} × {item.quantity}
             </span>
             <span style={{ fontWeight: 600, fontSize: 17, color: '#2563eb' }}>
-              {item.price * item.quantity} BYN
+              {(item.price * item.quantity).toFixed(2)} BYN
             </span>
           </li>
         ))}
@@ -221,7 +221,7 @@ const Order = () => {
       >
         Итого:{' '}
         <span style={{ color: '#2563eb' }}>
-          {cart.reduce((sum, item) => sum + item.price * item.quantity, 0)} BYN
+          {cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2)} BYN
         </span>
       </div>
       <button

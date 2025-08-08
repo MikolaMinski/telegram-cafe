@@ -142,7 +142,7 @@ const Menu: React.FC = () => {
               letterSpacing: 0.2,
             }}
           >
-            {dish.price} <span style={{ fontWeight: 400, color: '#888' }}>BYN</span>
+            {dish.price.toFixed(2)} <span style={{ fontWeight: 400, color: '#888' }}>BYN</span>
           </div>
           <div
             style={{

@@ -3,7 +3,7 @@ import { useCart } from './CartContext';
 
 const Cart = () => {
   const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0).toFixed(2);
 
   if (cart.length === 0)
     return (
@@ -57,7 +57,7 @@ const Cart = () => {
                 <span style={{ color: '#888', fontWeight: 400, marginLeft: 8 }}>× {item.quantity}</span>
               </span>
               <span style={{ fontWeight: 600, fontSize: 18, color: '#2563eb', minWidth: 70, textAlign: 'right' }}>
-                {item.price * item.quantity} BYN
+                {(item.price * item.quantity).toFixed(2)} BYN
               </span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 8, marginTop: 12 }}>
