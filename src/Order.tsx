@@ -219,7 +219,7 @@ const Order = () => {
           textAlign: 'right',
         }}
       >
-        Итог:{' '}
+        Итого:{' '}
         <span style={{ color: '#2563eb' }}>
           {cart.reduce((sum, item) => sum + item.price * item.quantity, 0)} BYN
         </span>
